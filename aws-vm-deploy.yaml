@@ -48,7 +48,7 @@ node_templates:
       client_config: *client_config
       agent_config:
         user: { get_input: agent_user }
-        key: { get_input: agent_private_key_path }
+        key: { get_secret: ssh-key }
       resource_config:
         kwargs:
           ImageId: { get_attribute: [ ami, aws_resource_id ] }
