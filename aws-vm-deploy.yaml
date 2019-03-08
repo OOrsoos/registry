@@ -16,15 +16,12 @@ inputs:
     description: The AWS region name, such as us-east-1 or us-west-1.
 
   agent_user:
-    description: >
-    User name used when SSH-ing into the started machine.
-  default: 'ubuntu'
+    description: User name used when SSH-ing into the started machine.
+    default: 'ubuntu'
   
   agent_private_key_path:
-    description: >
-    Path to a private key that resides on the management machine.
-    SSH-ing into agent machines will be done with this key.
-  default: '/tmp/AWSKeys.pem'
+    description: Private key for SSH-ing
+    default: '/tmp/AWSKeys.pem'
 
   availability_zone:
     type: string
