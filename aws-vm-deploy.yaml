@@ -48,7 +48,7 @@ node_templates:
       client_config: *client_config
       agent_config:
         user: { get_input: agent_user }
-        key: { get_secret: KeyName }
+        key: { get_secret: ssh-key }
       resource_config:
         kwargs:
           ImageId: { get_attribute: [ ami, aws_resource_id ] }
@@ -151,6 +151,9 @@ node_templates:
   key_pair:
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
+      resource_config:
+        kwargs:
+          KeyName: 'ssh-key'
       client_config: *client_config
       create_secret: true
       update_existing_secret: true
