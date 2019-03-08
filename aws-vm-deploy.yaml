@@ -15,6 +15,17 @@ inputs:
     type: string
     description: The AWS region name, such as us-east-1 or us-west-1.
 
+  agent_user:
+    description: >
+    User name used when SSH-ing into the started machine.
+  default: 'ubuntu'
+  
+  agent_private_key_path:
+    description: >
+    Path to a private key that resides on the management machine.
+    SSH-ing into agent machines will be done with this key.
+  default: '/tmp/AWSKeys.pem'
+
   availability_zone:
     type: string
     description: The availability zone in the AWS Region.
@@ -44,7 +55,8 @@ node_templates:
     properties:
       client_config: *client_config
       agent_config:
-        install_method: none
+        user: { get_input: agent_user }
+        key: { get_input: agent_private_key_path }
       resource_config:
         kwargs:
           ImageId: { get_attribute: [ ami, aws_resource_id ] }
@@ -105,7 +117,7 @@ node_templates:
         kwargs:
           IpPermissions:
           - IpProtocol: tcp
-            FromPort: 80
+            FromPort: 22
             ToPort: 80
             IpRanges:
             - CidrIp: 0.0.0.0/0
