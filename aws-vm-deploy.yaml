@@ -48,7 +48,7 @@ node_templates:
       client_config: *client_config
       agent_config:
         user: { get_input: agent_user }
-        key: { get_secret: ssh-key }
+        key: { get_attribute: [key_pair, KeyPair] }
       resource_config:
         kwargs:
           ImageId: { get_attribute: [ ami, aws_resource_id ] }
@@ -155,8 +155,7 @@ node_templates:
         kwargs:
           KeyName: 'ssh-key'
       client_config: *client_config
-      create_secret: true
-      update_existing_secret: true
+      store_in_runtime_properties: true
 
   route_public_subnet_internet_gateway:
     type: cloudify.nodes.aws.ec2.Route
@@ -218,5 +217,5 @@ outputs:
 
   application_endpoint:
     description: The ssh key to access the machine
-    value: { get_secret: ssh-key }
+    value: { get_attribute: [key_pair,ssh-key] }
 
