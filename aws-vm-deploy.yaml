@@ -115,9 +115,25 @@ node_templates:
           IpPermissions:
           - IpProtocol: tcp
             FromPort: 22
-            ToPort: 80
             IpRanges:
             - CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
+            FromPort: 80
+            IpRanges:
+            - CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
+            FromPort: 5671
+            IpRanges:
+            - CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
+            FromPort: 53229
+            IpRanges:
+            - CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
+            FromPort: 53333
+            IpRanges:
+            - CidrIp: 0.0.0.0/0    
+
     relationships:
     - type: cloudify.relationships.contained_in
       target: security_group
@@ -134,6 +150,15 @@ node_templates:
     relationships:
     - type: cloudify.relationships.depends_on
       target: vpc
+
+  key_pair:
+    type: cloudify.aws.nodes.KeyPair
+    properties:
+      name: AWSKeys.pem
+      private_key_path: /tmp/
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: security_group
 
   route_public_subnet_internet_gateway:
     type: cloudify.nodes.aws.ec2.Route
