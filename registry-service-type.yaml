@@ -1,6 +1,13 @@
 #Blueprint for registry-service type definition
 tosca_definitions_version: cloudify_dsl_1_3
 
+description: >
+  This blueprint defines the type for a simple registry-service
+
+imports:
+  - http://www.getcloudify.org/spec/cloudify/4.5.dev1/types.yaml
+  - plugin:cloudify-awssdk-plugin
+
 node_types:
 
   services.nodes.registry-service:
