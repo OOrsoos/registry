@@ -156,9 +156,9 @@ node_templates:
   key_pair:
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
-      resource_config:
-        kwargs:
-          KeyName: 'ssh-key'
+#      resource_config:
+#        kwargs:
+#          KeyName: 'ssh-key'
       client_config: *client_config
       store_in_runtime_properties: true
 
