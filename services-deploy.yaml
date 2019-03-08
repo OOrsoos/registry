@@ -1,0 +1,17 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+description: >
+  This blueprint installs an application using Cloudify on AWS.
+
+imports:
+  - http://www.getcloudify.org/spec/cloudify/4.5.dev1/types.yaml
+  - plugin:cloudify-awssdk-plugin
+  - registry-service-type.yaml
+
+node_templates:
+
+  registry-service:
+    type: services.nodes.registry-service
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: vm
