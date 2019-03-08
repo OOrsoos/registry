@@ -151,6 +151,7 @@ node_templates:
   key_pair:
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
+      client_config: *client_config
       create_secret: true
       secret_name: 'ssh-key'
       update_existing_secret: true
