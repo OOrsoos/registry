@@ -182,6 +182,9 @@ node_templates:
 
   registry-service:
       type: services.nodes.registry-service
+      relationships:
+      - type: cloudify.relationships.depends_on
+        target: vm
 
 outputs:
 
