@@ -1,0 +1,16 @@
+#Blueprint for registry-service type definition
+tosca_definitions_version: cloudify_dsl_1_3
+
+node_types:
+
+  services.nodes.registry-service:
+    derived_from: cloudify.nodes.Root
+    properties:
+        port:
+          description: Registry-service exposed port
+          type: integer
+          default: 8761
+    interface:
+      cloudify.interfaces.lifecycle:
+        start: scripts/registry-service/start.sh
+        stop: scripts/registry-service/stop.sh

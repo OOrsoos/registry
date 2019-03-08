@@ -1,0 +1,12 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+inputs:
+
+  install_script:
+    type: string
+    default: |
+    #!/bin/bash
+    apt-get update
+    apt-get install openjdk-8-jdk
+    cd /tmp
+    touch arrivedHere.txt
