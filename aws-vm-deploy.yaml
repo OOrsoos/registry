@@ -60,8 +60,6 @@ node_templates:
         target: ami
       - type: cloudify.relationships.depends_on
         target: nic
-      - type: cloudify.relationships.depends_on
-        target: key_pair
 
   ami:
     type: cloudify.nodes.aws.ec2.Image
@@ -103,8 +101,6 @@ node_templates:
       target: security_group
     - type: cloudify.relationships.depends_on
       target: subnet
-    - type: cloudify.relationships.depends_on
-      target: key_pair
 
   security_group_rules:
     type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
@@ -225,5 +221,5 @@ outputs:
 
   application_endpoint:
     description: The ssh key to access the machine
-    value: { get_attribute: [key_pair, KeyMaterial] }
+    value: { get_secret: ssh-key }
 
