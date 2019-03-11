@@ -159,13 +159,11 @@ node_templates:
   key_pair:
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
-#      resource_config:
-#        kwargs:
-#         KeyName: 'ssh-key'
+      resource_config:
+        kwargs:
+         KeyName: 'ssh-key'
       client_config: *client_config
-#      store_in_runtime_properties: true
-      use_external_resource: true
-      resource_id: 'AWSKeys'
+      store_in_runtime_properties: true
 
   route_public_subnet_internet_gateway:
     type: cloudify.nodes.aws.ec2.Route
@@ -228,4 +226,12 @@ outputs:
   application_endpoint:
     description: The ssh key to access the machine
     value: { get_attribute: [key_pair, KeyMaterial] }
+
+  second_try:
+    description: trying again with the ssh key
+    value: { get_property: [key_pair, KeyMaterial]}
+
+  third_try:
+    description: as it says
+    value: { get_attribute: [key_pair, ssh-key]}
 
