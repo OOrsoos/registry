@@ -47,6 +47,7 @@ node_templates:
     properties:
       client_config: *client_config
       agent_config:
+        install_method: remote
         user: { get_input: agent_user }
         key: { get_attribute: [key_pair, KeyMaterial] }
       resource_config:
@@ -158,11 +159,14 @@ node_templates:
   key_pair:
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
-      resource_config:
-        kwargs:
-          KeyName: 'ssh-key'
+#      resource_config:
+#        kwargs:
+#         KeyName: 'ssh-key'
       client_config: *client_config
-      store_in_runtime_properties: true
+#      store_in_runtime_properties: true
+      use_external_resource: true
+      resource_id: 'AWSKeys'
+      private_key_path: '/tmp/AWSKeys.pem'
 
   route_public_subnet_internet_gateway:
     type: cloudify.nodes.aws.ec2.Route
