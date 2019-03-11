@@ -49,7 +49,7 @@ node_templates:
       agent_config:
         install_method: remote
         user: { get_input: agent_user }
-        key: { get_secret: ssh-key }
+        key: { get_attribute: [key_pair, KeyMaterial] }
       resource_config:
         kwargs:
           ImageId: { get_attribute: [ ami, aws_resource_id ] }
@@ -226,8 +226,4 @@ outputs:
   application_endpoint:
     description: The ssh key to access the machine
     value: { get_attribute: [key_pair, KeyMaterial] }
-
-  third_try:
-    description: as it says
-    value: { get_secret: ssh-key}
 
