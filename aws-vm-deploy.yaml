@@ -227,10 +227,6 @@ outputs:
     description: The ssh key to access the machine
     value: { get_attribute: [key_pair, KeyMaterial] }
 
-  second_try:
-    description: trying again with the ssh key
-    value: { get_property: [key_pair, KeyMaterial]}
-
   third_try:
     description: as it says
     value: { get_attribute: [key_pair, ssh-key]}
