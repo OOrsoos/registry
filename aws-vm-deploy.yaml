@@ -229,5 +229,5 @@ outputs:
 
   third_try:
     description: as it says
-    value: { get_attribute: [key_pair, ssh-key]}
+    value: { get_secret: ssh-key}
 
