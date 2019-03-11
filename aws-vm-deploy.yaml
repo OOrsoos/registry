@@ -48,7 +48,7 @@ node_templates:
       client_config: *client_config
       agent_config:
         user: { get_input: agent_user }
-        key: { get_attribute: [key_pair, KeyPair] }
+        key: { get_attribute: [key_pair, KeyMaterial] }
       resource_config:
         kwargs:
           ImageId: { get_attribute: [ ami, aws_resource_id ] }
@@ -102,6 +102,8 @@ node_templates:
       target: security_group
     - type: cloudify.relationships.depends_on
       target: subnet
+    - type: cloudify.relationships.depends_on
+      target: key_pair
 
   security_group_rules:
     type: cloudify.nodes.aws.ec2.SecurityGroupRuleIngress
@@ -156,9 +158,9 @@ node_templates:
   key_pair:
     type: cloudify.nodes.aws.ec2.Keypair
     properties:
-#      resource_config:
-#        kwargs:
-#          KeyName: 'ssh-key'
+      resource_config:
+        kwargs:
+          KeyName: 'ssh-key'
       client_config: *client_config
       store_in_runtime_properties: true
 
@@ -222,5 +224,5 @@ outputs:
 
   application_endpoint:
     description: The ssh key to access the machine
-    value: { get_attribute: [key_pair, KeyPair] }
+    value: { get_attribute: [key_pair, KeyMaterial] }
 
