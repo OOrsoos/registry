@@ -166,7 +166,6 @@ node_templates:
 #      store_in_runtime_properties: true
       use_external_resource: true
       resource_id: 'AWSKeys'
-      private_key_path: '/tmp/AWSKeys.pem'
 
   route_public_subnet_internet_gateway:
     type: cloudify.nodes.aws.ec2.Route
