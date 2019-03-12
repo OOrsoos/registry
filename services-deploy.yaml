@@ -37,3 +37,7 @@ node_templates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: vm
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start: scripts/start.sh
+        stop: scripts/stop.sh
