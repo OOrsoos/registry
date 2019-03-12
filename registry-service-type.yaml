@@ -19,5 +19,5 @@ node_types:
           default: 8761
     interfaces:
       cloudify.interfaces.lifecycle:
-        start: scripts/registry-service/start.sh
-        stop: scripts/registry-service/stop.sh
+        start: scripts/start.sh
+        stop: scripts/stop.sh
