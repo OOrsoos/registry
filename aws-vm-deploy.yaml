@@ -39,7 +39,6 @@ dsl_definitions:
     aws_access_key_id: { get_secret: aws_access_key_id }
     aws_secret_access_key: { get_secret: aws_secret_access_key }
     region_name: { get_input: aws_region_name }
-    key_name: { get_secret: ssh-key }
 
 node_templates:
 
