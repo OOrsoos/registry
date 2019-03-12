@@ -47,9 +47,7 @@ node_templates:
     properties:
       client_config: *client_config
       agent_config:
-        install_method: remote
-        user: { get_input: agent_user }
-        key: { get_secret: ssh-key }
+        install_method: none
       resource_config:
         kwargs:
           ImageId: { get_attribute: [ ami, aws_resource_id ] }
