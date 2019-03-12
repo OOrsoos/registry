@@ -17,7 +17,3 @@ node_types:
           description: Registry-service exposed port
           type: integer
           default: 8761
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        start: scripts/start.sh
-        stop: scripts/stop.sh
