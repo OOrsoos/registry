@@ -5,7 +5,6 @@ description: >
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.5.dev1/types.yaml
-  - plugin:cloudify-awssdk-plugin
   - registry-service-type.yaml
 
 inputs:
