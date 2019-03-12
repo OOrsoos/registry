@@ -9,7 +9,10 @@ inputs:
     type: string
     default: |
       #!/bin/bash
+      sudo su -
+      rm /var/lib/dpkg/lock
       apt-get update
+      rm /var/lib/dpkg/lock
       apt-get install openjdk-8-jdk
       cd /tmp
       touch arrivedHere.txt
