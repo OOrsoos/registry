@@ -35,5 +35,5 @@ node_templates:
   registry-service:
     type: services.nodes.registry-service
     relationships:
-    - type: cloudify.relationships.contained_in
-      target: vm
+      - type: cloudify.relationships.contained_in
+        target: vm
