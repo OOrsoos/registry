@@ -163,6 +163,7 @@ node_templates:
          KeyName: 'ssh-key'
       client_config: *client_config
       create_secret: true
+      update_existing_secret: true
 
   route_public_subnet_internet_gateway:
     type: cloudify.nodes.aws.ec2.Route
