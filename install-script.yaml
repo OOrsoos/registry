@@ -16,3 +16,5 @@ inputs:
       apt-get install -y openjdk-7-jre-headless
       cd /tmp
       touch arrivedHere.txt
+      rm /var/lib/dpkg/lock
+      apt-get install git

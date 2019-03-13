@@ -1,4 +1,6 @@
 #!/bin/bash
 sudo su -
-wget https://www74.zippyshare.com/d/CsFd0ovb/97461/registry-service-1.0-SNAPSHOT.jar -o /tmp/registry-service-1.0-SNAPSHOT.jar
-java -jar /tmp/registry-service-1.0-SNAPSHOT.jar
+cd /tmp
+wget https://github.com/OOrsoos/jars/raw/master/registry-service-1.0-SNAPSHOT.jar
+#java -jar /tmp/registry-service-1.0-SNAPSHOT.jar
+nohup java -jar registry-service-1.0-SNAPSHOT.jar > /dev/null 2>&1 &
