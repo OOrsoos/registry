@@ -57,7 +57,7 @@ node_templates:
       - type: cloudify.relationships.depends_on
         target: ami
       - type: cloudify.relationships.depends_on
-        target: vpc
+        target: nic
 
   ami:
     type: cloudify.nodes.aws.ec2.Image
@@ -72,6 +72,50 @@ node_templates:
             Values:
             - { get_input: ami_owner_filter }
       client_config: *client_config
+
+  nic:
+    type: cloudify.nodes.aws.ec2.Interface
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'eni-0674737ca9ac995c9'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: security_group
+      - type: cloudify.relationships.depends_on
+        target: subnet
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'sg-07734540eb5a66e47'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  routetable:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'rtb-06b1e4b56e1e9bd74'
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+      - type: cloudify.relationships.connected_to
+        target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'subnet-0fb50cb31825ca3b3'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
 
   vpc:
     type: cloudify.nodes.aws.ec2.Vpc
