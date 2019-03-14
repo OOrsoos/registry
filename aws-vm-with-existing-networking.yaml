@@ -56,9 +56,9 @@ node_templates:
           VpcId: 'vpc-03f8bb1a9163a802a'
           SecurityGroup: 'sg-07734540eb5a66e47'
           InternetGateway: 'igw-094095b1f880209ac'
-      relationships:
-        - type: cloudify.relationships.depends_on
-          target: ami
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: ami
 
   ami:
     type: cloudify.nodes.aws.ec2.Image
