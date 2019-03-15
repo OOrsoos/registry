@@ -40,7 +40,32 @@ inputs:
   network-interface:
     type: string
     description: network interface for the connection
-    default: eni-0674737ca9ac995c9'
+    default: 'eni-0674737ca9ac995c9'
+
+  vpc-to-use:
+    type: string
+    description: vpc used for the instance
+    default: 'vpc-03f8bb1a9163a802a'
+
+  subnet-to-use:
+    type: string
+    description: subnet
+    default: 'subnet-0fb50cb31825ca3b3'
+
+  sec-group-to-use:
+    type: string
+    description: security group
+    default: 'sg-07734540eb5a66e47'
+
+  routetable-to-use:
+    type: string
+    description: routetable for the instance
+    default: 'rtb-06b1e4b56e1e9bd74'
+
+  internet-gateway-to-use:
+    type: string
+    description: internet gateway
+    default: 'igw-094095b1f880209ac'
 
 dsl_definitions:
 
@@ -100,7 +125,7 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'sg-07734540eb5a66e47'
+      resource_id: { get_input: sec-group-to-use }
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
@@ -110,7 +135,7 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'rtb-06b1e4b56e1e9bd74'
+      resource_id: { get_input: routetable-to-use }
     relationships:
       - type: cloudify.relationships.contained_in
         target: vpc
@@ -122,7 +147,7 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'subnet-0fb50cb31825ca3b3'
+      resource_id: { get_input: subnet-to-use }
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
@@ -132,24 +157,14 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'vpc-03f8bb1a9163a802a'
-
-  security_group:
-    type: cloudify.nodes.aws.ec2.SecurityGroup
-    properties:
-      client_config: *client_config
-      use_external_resource: true
-      resource_id: 'sg-07734540eb5a66e47'
-    relationships:
-      - type: cloudify.relationships.depends_on
-        target: vpc
+      resource_id: { get_input: vpc-to-use }
 
   internet_gateway:
     type: cloudify.nodes.aws.ec2.InternetGateway
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'igw-094095b1f880209ac'
+      resource_id: { get_input: internet-gateway-to-use s}
     relationships:
       - type: cloudify.relationships.connected_to
         target: vpc
