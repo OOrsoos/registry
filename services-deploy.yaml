@@ -6,6 +6,16 @@ description: >
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.5/types.yaml
   - types/registry-service-type.yaml
+  - types/gateway-service-type.yaml
+  - types/calendar-service-type.yaml
+  - types/clock-service-type.yaml
+  - types/arrival-service-type.yaml
+  - types/cpu-service-type.yaml
+  - types/in-out-service-type.yaml
+  - types/observation-service-type.yaml
+  - types/end-simulation-service-type.yaml
+  - types/scheduler-service-type.yaml
+  - types/simulator-service-type.yaml
 
 inputs:
   server_ip:
