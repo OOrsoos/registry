@@ -1,0 +1,19 @@
+#Blueprint for gateway-service type definition
+tosca_definitions_version: cloudify_dsl_1_3
+
+imports:
+  - http://www.getcloudify.org/spec/cloudify/4.5/types.yaml
+
+node_types:
+
+  services.nodes.gateway-service:
+    derived_from: cloudify.nodes.Root
+    properties:
+        port:
+          description: Gateway-service exposed port
+          type: integer
+          default: 8762
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start: scripts/gateway-service/start.sh
+        stop: scripts/gateway-service/stop.sh

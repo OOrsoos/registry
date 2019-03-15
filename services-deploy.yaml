@@ -5,7 +5,7 @@ description: >
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.5/types.yaml
-  - registry-service-type.yaml
+  - types/registry-service-type.yaml
 
 inputs:
   server_ip:
@@ -37,3 +37,83 @@ node_templates:
     relationships:
       - type: cloudify.relationships.contained_in
         target: vm1
+
+  gateway-service:
+    type: services.nodes.gateway-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: registry-service
+
+  calendar-service:
+    type: services.nodes.calendar-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: gateway-service
+
+  clock-service:
+    type: services.nodes.clock-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: calendar-service
+
+  arrival-service:
+    type: services.nodes.arrival-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: clock-service
+
+  cpu-service:
+    type: services.nodes.cpu-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: arrival-service
+
+  in-out-service:
+    type: services.nodes.in-out-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: cpu-service
+
+  observation-service:
+    type: services.nodes.observation-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: in-out-service
+
+  end-simulation-service:
+    type: services.nodes.end-simulation-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: observation-service
+
+  scheduler-service:
+    type: services.nodes.scheduler-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: end-simulation-service
+
+  simulator-service:
+    type: services.nodes.simulator-service
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vm1
+      - type: cloudify.relationships.depends_on
+        target: scheduler-service
