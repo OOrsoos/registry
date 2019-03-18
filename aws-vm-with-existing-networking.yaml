@@ -38,7 +38,7 @@ inputs:
   network-interface:
     type: string
     description: network interface for the connection
-    default: eni-0674737ca9ac995c9'
+    default: 'eni-0674737ca9ac995c9'
 
 dsl_definitions:
 
