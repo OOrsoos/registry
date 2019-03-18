@@ -126,3 +126,9 @@ node_templates:
         target: vm1
       - type: cloudify.relationships.depends_on
         target: scheduler-service
+
+outputs:
+
+  eureka_link:
+    description: The external endpoint of the application.
+    value: { concat: [ 'http://', { get_attribute: [ vm, public_ip_address ] }, ':8761' ] }

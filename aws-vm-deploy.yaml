@@ -222,7 +222,7 @@ outputs:
     description: The ssh key to access the machine
     value: { get_secret: ssh-key }
 
-  eureka_link:
+  machine_public_ip:
     description: The external endpoint of the application.
-    value: { concat: [ 'http://', { get_attribute: [ vm, public_ip_address ] }, ':8761' ] }
+    value: { get_attribute: [ vm, public_ip_address ] }
 
