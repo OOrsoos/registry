@@ -131,4 +131,4 @@ outputs:
 
   eureka_link:
     description: The external endpoint of the application.
-    value: { concat: [ 'http://', { get_attribute: [ vm1, public_ip_address ] }, ':8761' ] }
+    value: { concat: [ 'http://', { get_input: server_ip }, ':8761' ] }
