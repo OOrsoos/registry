@@ -1,6 +1,6 @@
 tosca_definitions_version: cloudify_dsl_1_3
 
-description: Installing Vm with existing vpc
+description: This blueprint installs a VM with an already existing network on AWS.
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.5.dev1/types.yaml

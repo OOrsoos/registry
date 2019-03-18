@@ -1,7 +1,7 @@
 tosca_definitions_version: cloudify_dsl_1_3
 
 description: >
-  This blueprint installs an application using Cloudify on AWS.
+  This blueprint installs the services used to accomplish the MSaaS paradigm on a Cloud Virtual Machine.
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.5/types.yaml

@@ -1,7 +1,7 @@
 tosca_definitions_version: cloudify_dsl_1_3
 
 description: >
-  This blueprint installs an application using Cloudify on AWS.
+  This blueprint installs a virtual machine with Ubuntu 16.04 on AWS.
 
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.5.dev1/types.yaml
