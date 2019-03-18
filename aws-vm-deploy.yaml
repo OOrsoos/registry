@@ -218,7 +218,11 @@ node_templates:
 
 outputs:
 
-  application_endpoint:
+  access_key:
     description: The ssh key to access the machine
     value: { get_secret: ssh-key }
+
+  eureka_link:
+    description: The external endpoint of the application.
+    value: { concat: [ 'http://', { get_attribute: [ vm, public_ip_address ] }, ':8761' ] }
 

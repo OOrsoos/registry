@@ -32,37 +32,37 @@ inputs:
 
   key-for-ssh:
     type: string
-    description: The name of the ssh key to access the machine
+    description: The name of the SSH Key used to access the machine.
     default: 'ssh-key'
 
   network-interface:
     type: string
-    description: network interface for the connection
+    description: ID of the Network interface that will be attached to the VM.
     default: 'eni-0674737ca9ac995c9'
 
   vpc-to-use:
     type: string
-    description: vpc used for the instance
+    description: ID of the VPC used by the VM.
     default: 'vpc-03f8bb1a9163a802a'
 
   subnet-to-use:
     type: string
-    description: subnet
+    description: ID of the subnet that will be used by the VM.
     default: 'subnet-0fb50cb31825ca3b3'
 
   sec-group-to-use:
     type: string
-    description: security group
+    description: ID of the security group used to open the right ports of the VM.
     default: 'sg-07734540eb5a66e47'
 
   routetable-to-use:
     type: string
-    description: routetable for the instance
+    description: ID of the routetable used by the VM.
     default: 'rtb-06b1e4b56e1e9bd74'
 
   internet-gateway-to-use:
     type: string
-    description: internet gateway
+    description: ID of the internet gateway used by the VM.
     default: 'igw-094095b1f880209ac'
 
 dsl_definitions:
@@ -166,3 +166,13 @@ node_templates:
     relationships:
       - type: cloudify.relationships.connected_to
         target: vpc
+
+outputs:
+
+  access_key:
+    description: The ssh key to access the machine
+    value: { get_secret: ssh-key }
+
+  eureka_link:
+    description: The external endpoint of the application.
+    value: { concat: [ 'http://', { get_attribute: [ vm, public_ip_address ] }, ':8761' ] }

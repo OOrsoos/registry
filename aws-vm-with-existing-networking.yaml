@@ -32,7 +32,7 @@ inputs:
 
   key-for-ssh:
     type: string
-    description: The name of the ssh key to access the machine
+    description: The name of the SSH Key used to access the virtual machine.
     default: 'ssh-key'
 
 dsl_definitions:
@@ -93,7 +93,7 @@ node_templates:
       client_config: *client_config
       resource_config:
         kwargs:
-          Description: Network interface.
+          Description: Network interface for virtual machine.
           SubnetId: { get_attribute: [ subnet, aws_resource_id ] }
           Groups:
           - { get_attribute: [ security_group, aws_resource_id ] }
@@ -161,3 +161,13 @@ node_templates:
     relationships:
       - type: cloudify.relationships.connected_to
         target: vpc
+
+outputs:
+
+  access_key:
+    description: The ssh key to access the machine
+    value: { get_secret: ssh-key }
+
+  eureka_link:
+    description: The external endpoint of the application.
+    value: { concat: [ 'http://', { get_attribute: [ vm, public_ip_address ] }, ':8761' ] }
