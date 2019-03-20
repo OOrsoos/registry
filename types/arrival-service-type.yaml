@@ -12,3 +12,9 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/arrival-service/start.sh
         stop: scripts/arrival-service/stop.sh
+
+outputs:
+
+  Arrival_service_status:
+    description: The api construction to know the arrival service status 
+    value: 'GET  /api/arrival-service/'
