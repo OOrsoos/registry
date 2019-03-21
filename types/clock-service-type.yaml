@@ -12,3 +12,25 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/clock-service/start.sh
         stop: scripts/clock-service/stop.sh
+
+outputs:
+
+  Clock_service_status:
+    description: Api construction to check the status of the clock service.
+    value: 'GET /api/clock-service/'
+
+  Actual_simulation_time:
+    description: Returns the actual simulation time.
+    value: 'GET /api/clock-service/clock'
+
+  Register_actual_clock_as_stable:
+    description: Registers the actual clock value as a stable state.
+    value: 'POST /api/clock-service/stable'
+
+  Use_previous_clock_stable_state:
+    description: Sets the actual clock value with the previous registered stable state.
+    value: 'PUT /api/clock-service/stable'
+
+  Reset_clock_value:
+    description: Resets the value of the clock to the initial state.
+    value: 'POST /api/clock-service/reset-state'

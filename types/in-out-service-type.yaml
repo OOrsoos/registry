@@ -12,3 +12,49 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/in-out-service/start.sh
         stop: scripts/in-out-service/stop.sh
+
+outputs:
+
+  In_out_service_status:
+    description: The api construction to check the status of the in out service.
+    value: 'GET /api/in-out-service/'
+
+  Size_of_queue_io:
+    description: Returns the number of the jobs inside the queue.
+    value: 'GET /api/in-out-service/queue/size'
+
+  Enqueue_job_io:
+    description: Adds a job to the queue.
+    value: 'POST /api/in-out-service/queue/add  body: job object in json format'
+
+  Jobs_in_the_center_io:
+    description: Returns the number of jobs inside the I/o center.
+    value: 'GET /api/in-out-service/service/size'
+
+  Add_job_in_the_center_io:
+    description: Adds a job to the i/o center.
+    value: 'POST /api/in-out-service/add  body: job object in json format'
+
+  Simulate_center_service_time_io:
+    description: Simulates the time that a job will pass inside the i/o center.
+    value: 'GET /api/in-out-service/service/time'
+
+  Check_center_status_io:
+    description: Returns the actual status of the center.
+    value: 'GET /api/in-out-service/service/status'
+
+  End_cpu_routine:
+    description: Executes the end cpu routine.
+    value: 'POST /api/in-out-service/routine'
+
+  Record_stable_cpu_status:
+    description: Records the actual status of the cpu as a stable status.
+    value: 'POST /api/in-out-service/service/stable'
+
+  Use_last_stable_status:
+    description: Uses the last stable status available.
+    value: 'PUT /api/cpu-service/service/stable'
+
+  Reset_center_value:
+    description: Resets the value of the center to its initial status.
+    value: 'POST /api/cpu-service/service/reset-status'

@@ -12,3 +12,13 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/scheduler-service/start.sh
         stop: scripts/scheduler-service/stop.sh
+
+outputs:
+
+  Scheduler_service_status:
+    description: The api construction to check the scheduler service status.
+    value: 'GET /api/scheduler-service/'
+
+  Scheduler_routine_start:
+    description: Executes the scheduler routing for the run and the observation passed as parameters.
+    value: 'POST /api/scheduler-service/routine/{run}/{obs}'

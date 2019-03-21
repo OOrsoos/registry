@@ -12,3 +12,49 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/observation-service/start.sh
         stop: scripts/observation-service/stop.sh
+
+outputs:
+
+  Observation_service_status:
+    description: The api construction to check the status of the observation service.
+    value: 'GET /api/observation-service/'
+
+  Observation_routine:
+    description: Executes the routing to check the run number {p} and of the observation number {n}.
+    value: 'GET /api/observation-service/{p}/{n}'
+
+  Gordon_average:
+    description: Returns the values of the average computed with Gordon(?)
+    value: 'GET /api/observation-service/gordon-media'
+
+  Gordon_variance:
+    description: Returns the values of the variance computed with Gordon(?)
+    value: 'GET /api/observation-service/gordon-varianza'
+  
+  Counted_jobs: 
+    description: Returns the number of jobs counted during the run cycles.
+    value: 'GET /api/observation-service/analysis/q'
+
+  Counted_observations:
+    description: Returns the number of the observations made during the analysis phase.
+    value: 'GET /api/observation-service/analysis/n'
+
+  Set_observation_number:
+    description: Sets the number of observations to make during the analysis phase.
+    value: 'PUT /api/observation-service/analysis/n/{index}/{value}'
+
+  Time_interval_between_observations:
+    description: Returns the time difference between two consecutive observations.
+    value: 'GET /api/observation-service/delta'
+
+  Gordon_estimation:
+    description: Computes the average using the Gordon extimator.
+    value: 'POST /api/observation-service/gordon'
+
+  Average_observed_job_number:
+    description: Computes the average values of the observed jobs.
+    value: 'POST /api/observation-service/user/avg'
+
+  Set_observation_stable_status:
+    description: Records the actual state as a stable one.
+    value: 'PUT /api/observation-service/job/{runLenght}/{obsLength}'

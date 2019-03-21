@@ -12,3 +12,13 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/end-simulation-service/start.sh
         stop: scripts/end-simulation-service/stop.sh
+
+outputs:
+
+  End_simulation_status:
+    description: The api construction to check the end simulation service status.
+    value: 'GET /api/end-simulation-service/'
+
+  End_simulation_routine:
+    description: Launches the end simulation routine.
+    value: 'POST /api/end-simulation-service/routine'

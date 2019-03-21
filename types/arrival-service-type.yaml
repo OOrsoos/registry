@@ -16,5 +16,13 @@ node_types:
 outputs:
 
   Arrival_service_status:
-    description: The api construction to know the arrival service status 
+    description: The api construction to check the arrival service status 
     value: 'GET  /api/arrival-service/'
+
+  Next_event_time:
+    description: Simulates the value of the next event time.
+    value: 'GET /api/arrival-service/service/time'
+
+  Arrival_routine:
+    description: Executes the arriving routine.
+    value: 'POST /api/routine'

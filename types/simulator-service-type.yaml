@@ -12,3 +12,41 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/simulator-service/start.sh
         stop: scripts/simulator-service/stop.sh
+
+outputs:
+
+  Simulator_service_status:
+    description: The api construction to check the simulator service status.
+    value: 'GET /api/simulator-service/'
+
+  Run_number:
+    description: Returns the number of the runs to be executed.
+    value: 'GET /api/simulator-service/run/length'
+
+  Observation_number:
+    description: Returns the number of the observations to be made.
+    value: 'GET /api/simulator-service/observation/length'
+
+  Query_phase:
+    description: Returns the actual phase of the simulator.
+    value: 'GET /api/simulator-service/stabilization/phase'
+
+  Set_actual_phase:
+    description: Sets the actual phase of the simulator with the boolean contained in the body.
+    value: 'PUT /api/simulator-service/stabilization/phase body: boolean'
+
+  Start_simulator:
+    description: Starts the simulator.
+    value: 'POST /api/simulator-service/run'
+
+  Record_stable_status:
+    description: Records the actual state of the components of the simulator as a stable one.
+    value: 'POST /api/simulator-service/state/store/stable'
+
+  Use_last_stable_status:
+    description: Use the actual saved stable state as the actual state of the simulator.
+    value: 'PUT /api/simulator-service/state/back/stable'
+
+  Reset_simulator_state:
+    description: Resets the status of the simulator to the initial one.
+    value: 'PUT /api/simulator-service/state/back/initial'

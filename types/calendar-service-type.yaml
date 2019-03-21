@@ -12,3 +12,29 @@ node_types:
       cloudify.interfaces.lifecycle:
         start: scripts/calendar-service/start.sh
         stop: scripts/calendar-service/stop.sh
+
+outputs:
+
+  Calendar_service_status:
+    description: The api construction to check the calendar service status.
+    value: 'GET /api/calendar-service'
+
+  Actual_simulation_time:
+    description: Returns the actual simulation time.
+    value: 'PUT /api/calendar-service/events   body: event object in json format'
+
+  Next_event:
+    description: Returns the next event in the calendar.
+    value: 'GET /api/calendar-service/events/next'
+
+  Events_list:
+    description: Returns the list of all the events in the calendar.
+    value: 'GET /api/calendar-service/events'
+
+  Register_as_stable:
+    description: Register the actual events in the calendar in the stable status.
+    value: 'POST /api/calendar-service/stable'
+
+  Use_previous_stable_state:
+    description: Use the last registered stable state as the actual calendar.
+    value: 'PUT /api/calendar-service/stable'
