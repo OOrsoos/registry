@@ -31,10 +31,10 @@ outputs:
     description: Returns the list of all the events in the calendar.
     value: 'GET /api/calendar-service/events'
 
-  Register_as_stable:
+  Register_as_stable_cal:
     description: Register the actual events in the calendar in the stable status.
     value: 'POST /api/calendar-service/stable'
 
-  Use_previous_stable_state:
+  Use_previous_stable_state_cal:
     description: Use the last registered stable state as the actual calendar.
     value: 'PUT /api/calendar-service/stable'

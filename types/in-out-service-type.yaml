@@ -43,18 +43,18 @@ outputs:
     description: Returns the actual status of the center.
     value: 'GET /api/in-out-service/service/status'
 
-  End_cpu_routine:
-    description: Executes the end cpu routine.
+  End_io_routine:
+    description: Executes the end i/o routine.
     value: 'POST /api/in-out-service/routine'
 
-  Record_stable_cpu_status:
-    description: Records the actual status of the cpu as a stable status.
+  Record_stable_io_status:
+    description: Records the actual status of the i/o as a stable status.
     value: 'POST /api/in-out-service/service/stable'
 
-  Use_last_stable_status:
+  Use_last_stable_status_io:
     description: Uses the last stable status available.
-    value: 'PUT /api/cpu-service/service/stable'
+    value: 'PUT /api/in-out-service/service/stable'
 
   Reset_center_value:
     description: Resets the value of the center to its initial status.
-    value: 'POST /api/cpu-service/service/reset-status'
+    value: 'POST /api/in-out-service/service/reset-status'

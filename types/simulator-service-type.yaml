@@ -43,7 +43,7 @@ outputs:
     description: Records the actual state of the components of the simulator as a stable one.
     value: 'POST /api/simulator-service/state/store/stable'
 
-  Use_last_stable_status:
+  Use_last_stable_status_sim:
     description: Use the actual saved stable state as the actual state of the simulator.
     value: 'PUT /api/simulator-service/state/back/stable'
 

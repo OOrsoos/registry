@@ -51,10 +51,10 @@ outputs:
     description: Records the actual status of the cpu as a stable status.
     value: 'POST /api/cpu-service/service/stable'
 
-  Use_last_stable_status:
+  Use_last_stable_status_cpu:
     description: Uses the last stable status available.
     value: 'PUT /api/cpu-service/service/stable'
 
-  Reset_center_value:
+  Reset_center_value_cpu:
     description: Resets the value of the center to its initial status.
     value: 'POST /api/cpu-service/service/reset-status'
