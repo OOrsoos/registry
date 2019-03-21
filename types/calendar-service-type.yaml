@@ -19,7 +19,7 @@ outputs:
     description: The api construction to check the calendar service status.
     value: 'GET /api/calendar-service'
 
-  Actual_simulation_time:
+  Actual_simulation_time_cal:
     description: Returns the actual simulation time.
     value: 'PUT /api/calendar-service/events   body: event object in json format'
 

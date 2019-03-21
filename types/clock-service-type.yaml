@@ -19,7 +19,7 @@ outputs:
     description: Api construction to check the status of the clock service.
     value: 'GET /api/clock-service/'
 
-  Actual_simulation_time:
+  Actual_simulation_time_clock:
     description: Returns the actual simulation time.
     value: 'GET /api/clock-service/clock'
 
