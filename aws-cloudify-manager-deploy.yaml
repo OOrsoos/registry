@@ -228,25 +228,25 @@ outputs:
 
   network_interface_id:
     description: The id of the network interface created with the virtual machine.
-    value: { get_attribute: [ nic, network_interface_id ] }
+    value: { get_attribute: [ nic, aws_resource_id ] }
 
   vpc_id:
     description: The id of the vpc created with the virtual machine.
-    value: { get_attribute: [ vpc, vpc_id ] }
+    value: { get_attribute: [ vpc, aws_resource_id ] }
 
   subnet_id:
     description: The id of the subnet created with the virtual machine.
-    value: { get_attribute: [ subnet, subnet_id ] }
+    value: { get_attribute: [ subnet, aws_resource_id ] }
 
   security_group_id:
     description: The id of the security group created with the virtual machine.
-    value: { get_attribute: [ security_group, group_id ] }
+    value: { get_attribute: [ security_group, aws_resource_id ] }
 
   route_table_id:
     description: The id of the route table created with the virtual machine.
-    value: { get_attribute: [ routetable, route_table_id ] }
+    value: { get_attribute: [ routetable, aws_resource_id ] }
 
   internet_gateway_id:
     description: The id of the internet gateway created with the virtual machine.
-    value: { get_attribute: [ internet_gateway, internet_gateway_id ] }
+    value: { get_attribute: [ internet_gateway, aws_resource_id ] }
 
