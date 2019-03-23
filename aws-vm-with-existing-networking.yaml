@@ -3,7 +3,7 @@ tosca_definitions_version: cloudify_dsl_1_3
 imports:
   - http://www.getcloudify.org/spec/cloudify/4.5.dev1/types.yaml
   - install-script.yaml
-  - plugin:cloudify-aws-plugin
+  - plugin:cloudify-awssdk-plugin
 
 inputs:
 
