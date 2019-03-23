@@ -123,6 +123,16 @@ node_templates:
             IpRanges:
             - CidrIp: 0.0.0.0/0
           - IpProtocol: tcp
+            FromPort: 8761
+            ToPort: 8761
+            IpRanges:
+            - CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
+            FromPort: 8762
+            ToPort: 8762
+            IpRanges:
+            - CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
             FromPort: 53229
             ToPort: 53229
             IpRanges:

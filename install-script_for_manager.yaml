@@ -1,0 +1,40 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+description: >
+  This blueprint defines the basic setup for the cloudify manager on cloud.
+
+inputs:
+
+  install_script:
+    type: string
+    default: |
+      #!/bin/bash
+      sudo su -
+      yum install -y wget
+      yum install -y git
+      cfy secrets create --secret-string AKIAI4TD5YBWEZOQLNHQ aws_access_key_id
+      cfy secrets create --secret-string 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 aws_secret_access_key
+      echo "-----BEGIN RSA PRIVATE KEY-----
+      MIIEpAIBAAKCAQEApkpOaAtV8WQUNYyP6oXoV8et3D5zll6246hRAfFMRAmOWqEucMECreEQIaTY
+      qGH6paILiYfaRFaTpwnPXTmrz6j5YhJPvzL57dH3ub9MglVY93WrAuYyUnqHhc4wsclXhqgZ6Rpm
+      DUZt3U4uTDW3YGJn8dw80MR+0ageBJ1m8y7H7pGeEhatd0AqMqWiJf+jzZPs+6U5MVHPBSU3sxN6
+      gXWhPTOJMmkCTgFj41PxT6hvYfInNRvExlnT6xrR8MLHJfucWFEPYjd2+Tvv3C24FTY2xQ2ylI12
+      2BE52Oc43j0MYvKwfn21T4x18ee/Wum+mq9TDX1iTvFmANZ4ZBCuZQIDAQABAoIBAEsi0AKa/J4x
+      hiAb/vsMvkrLYnddkISlDyYWa2PhT4B+gN/abE1uKHPAebV58ptCiipE6cmepLS0Gcsj15pb8JHH
+      28bAV2Ag/GTEtpYrJbrOLYDCnh6VPK+fxZRj8gSi4PVrByoYT3w4EnQoWyr8KntWe3kA9kmuP08k
+      E0wqgtXl1JlCeXq40J6wxcU9TimNgf+2LmouA5q5TGumknpi2qiDcMMO/uzAtxCdvgPryokYXjJo
+      F/pGaxBZysa5+2fmF63T68qIT6qrhRZWBHuqeqZFG246OGVZwaXY2Ee4jjh2shTFXXlUUQjAvpuB
+      r5PPs36kLMr02l9qYWuuP+3ibBECgYEA8VQCpEKxFOvsCKzMf6t6qJpE+Us9Ym0yNU+u2VS34cwC
+      rZSMuk9OwQlyPR1IttYq62T7q0pvFk3ZpX64IPO+aaP6RULownTb1CtzovN9oGDyupg/JkYZqdaN
+      1IzFY4m7MXG0V93WavVjH2J+MlbBzFQ0CnzdC7Gx2P//yq0xDEsCgYEAsGZrQ9Y5VqNQxcw6RtUo
+      co/hCVVZ7A+1cgll7KjMWtClUx05jQxBraqZd+KgWmtbN7+htNm1l3w6XuafDPTX1EIakesmKdYy
+      LQp6pIWFDelP9DW/uZN9u+0xYwKbTFAkZYLm1oMbLyDG5Iu+hfLoFQIwE1pa7HMWh+/LEBhNIg8C
+      gYEAvkmb+6GKuBB/ASgf59ty0Fc0Y83sDRxFJrw6BqxCggy3X99uR8oZMyUbqwzYNTMSjKIHv7zl
+      cxTXtSMCVRlc3zepM8vadNpoLBhHCgos2LUZMAC0ap2DxuOi2iJV0nLb49Tgexg05gmvqyOillbK
+      YS9UCaEDOyFWNuFE9K8zqZkCgYEArnIqw+RXwekyWNm2DBSCsoC9EEja64tBaewHYvovVeQeispM
+      /sLPNNqQeLGi2Khwhfo6BaqDXbLZ2r4BLoP36Q4STpmYnSkZZ9eEH613PqGrkxuQZgqI/k78Vyjd
+      waNDyyuf8yWmvX2Rk7TrDnaAsz39ozXo0wqhjn9CdsFBjlsCgYAU4YQJbX9E3MrWLvalNvbo63Tb
+      kBHyRfac4c+3fyU2tBD81/UyhB/0LM2jKcEDO+XRWK0KCleeVPbHG0h1hXtV5hRWuVfcmKmX87lr
+      Tfrmotd/QN8X7b7x1Umi6cYEpAnu/dTBsvw7F8WTU2K3skMaMX4dVSFLpevhJ1zUkvGfBQ==
+      -----END RSA PRIVATE KEY-----" >> /tmp/awsAccess.pem
+      cfy secrets create --secret-file /tmp/awsAccess.pem ssh-key
