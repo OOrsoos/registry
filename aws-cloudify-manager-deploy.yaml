@@ -236,10 +236,6 @@ outputs:
     description: The external endpoint of the application.
     value: { get_attribute: [ vm, public_ip_address ] }
 
-  network_interface_id:
-    description: The id of the network interface created with the virtual machine.
-    value: { get_attribute: [ nic, aws_resource_id ] }
-
   vpc_id:
     description: The id of the vpc created with the virtual machine.
     value: { get_attribute: [ vpc, aws_resource_id ] }

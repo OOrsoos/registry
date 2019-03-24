@@ -34,12 +34,7 @@ inputs:
     type: string
     description: The name of the SSH Key used to access the machine.
     default: 'ssh-key'
-
-  network-interface:
-    type: string
-    description: ID of the Network interface that will be attached to the VM.
-    default: 'eni-0674737ca9ac995c9'
-
+    
   vpc-to-use:
     type: string
     description: ID of the VPC used by the VM.
