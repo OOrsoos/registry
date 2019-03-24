@@ -12,3 +12,7 @@ inputs:
       sudo su -
       yum install -y wget
       yum install -y git
+      cd /tmp
+      wget http://repository.cloudifysource.org/cloudify/wagons/cloudify-awssdk-plugin/2.7.1/cloudify_awssdk_plugin-2.7.1-py27-none-linux_x86_64-centos-Core.wgn
+      wget http://www.getcloudify.org/spec/awssdk-plugin/2.7.1/plugin.yaml
+      cfy plugins upload -y plugin.yaml cloudify_awssdk_plugin-2.7.1-py27-none-linux_x86_64-centos-Core.wgn
