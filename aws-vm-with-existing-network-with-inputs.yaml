@@ -60,11 +60,6 @@ inputs:
     description: ID of the internet gateway used by the VM.
     default: 'igw-094095b1f880209ac'
 
-  elasticip-to-use:
-    type: string
-    description: The elastic ip to use for the machine
-    default: 'eipalloc-0753c138e2ded6630'
-
 dsl_definitions:
 
   client_config: &client_config
@@ -113,8 +108,6 @@ node_templates:
         kwargs:
           Domain: 'vpc'
       client_config: *client_config
-      use_external_resource: true
-      resource_id: { get_input: elasticip-to-use }
     relationships:
     - type: cloudify.relationships.depends_on
       target: nic
