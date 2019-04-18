@@ -116,12 +116,8 @@ node_templates:
     type: cloudify.nodes.aws.ec2.Interface
     properties:
       client_config: *client_config
-      resource_config:
-        kwargs:
-          Description: Network interface for virtual machine.
-          SubnetId: { get_attribute: [ subnet, aws_resource_id ] }
-          Groups:
-          - { get_attribute: [ security_group, aws_resource_id ] }
+      use_external_resource: true
+      resource_id: 'eni-024c4db5a0687a860'
     relationships:
     - type: cloudify.relationships.depends_on
       target: security_group
