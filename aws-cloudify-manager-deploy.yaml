@@ -9,7 +9,7 @@ inputs:
 
   aws_region_name:
     type: string
-    description: The AWS region name, such as us-east-1 or us-west-1.
+    description: The AWS region name, such as us-east-1 or us-west-1
 
   agent_user:
     description: User name used when SSH-ing into the started machine.
