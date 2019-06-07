@@ -38,12 +38,12 @@ inputs:
   vpc-to-use:
     type: string
     description: ID of the VPC used by the VM.
-    default: 'vpc-03f8bb1a9163a802a'
+    default: 'vpc-000837719d086d7d5'
 
   subnet-to-use:
     type: string
     description: ID of the subnet that will be used by the VM.
-    default: 'subnet-0fb50cb31825ca3b3'
+    default: 'subnet-0924a1574ed035111'
 
   sec-group-to-use:
     type: string
