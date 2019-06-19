@@ -1,0 +1,173 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+imports:
+  - http://www.getcloudify.org/spec/cloudify/4.5.dev1/types.yaml
+  - install-script.yaml
+  - plugin:cloudify-awssdk-plugin
+
+inputs:
+
+  aws_region_name:
+    type: string
+    description: The AWS region name, such as us-east-1 or us-west-1.
+
+  agent_user:
+    description: User name used when SSH-ing into the started machine.
+    default: 'ubuntu'
+
+  availability_zone:
+    type: string
+    description: The availability zone in the AWS Region.
+    default: { concat: [ { get_input: aws_region_name }, 'b' ] }
+
+  ami_owner_filter:
+    type: string
+    description: The AWS AMI owner number.
+    default: '099720109477'
+
+  ami_name_filter:
+    type: string
+    description: The name of the AWS AMI in the AWS region.
+    default: 'ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20181114'
+
+  key-for-ssh:
+    type: string
+    description: The name of the SSH Key used to access the virtual machine.
+    default: 'ssh-key'
+
+dsl_definitions:
+
+  client_config: &client_config
+    aws_access_key_id: { get_secret: aws_access_key_id }
+    aws_secret_access_key: { get_secret: aws_secret_access_key }
+    region_name: { get_input: aws_region_name }
+
+node_templates:
+
+  vm:
+    type: cloudify.nodes.aws.ec2.Instances
+    properties:
+      client_config: *client_config
+      agent_config:
+        install_method: none
+      resource_config:
+        kwargs:
+          ImageId: { get_attribute: [ ami, aws_resource_id ] }
+          InstanceType: m4.large
+          UserData: { get_input: install_script }
+          KeyName: { get_input: key-for-ssh }
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: ami
+      - type: cloudify.relationships.depends_on
+        target: nic
+
+  ami:
+    type: cloudify.nodes.aws.ec2.Image
+    properties:
+      resource_config:
+        kwargs:
+          Filters:
+          - Name: name
+            Values:
+            - { get_input: ami_name_filter }
+          - Name: owner-id
+            Values:
+            - { get_input: ami_owner_filter }
+      client_config: *client_config
+
+  ip:
+    type: cloudify.nodes.aws.ec2.ElasticIP
+    properties:
+      resource_config:
+        kwargs:
+          Domain: 'vpc'
+      client_config: *client_config
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: nic
+
+  nic:
+    type: cloudify.nodes.aws.ec2.Interface
+    properties:
+      client_config: *client_config
+      resource_config:
+        kwargs:
+          Description: Network interface for virtual machine.
+          SubnetId: { get_attribute: [ subnet, aws_resource_id ] }
+          Groups:
+          - { get_attribute: [ security_group, aws_resource_id ] }
+    relationships:
+    - type: cloudify.relationships.depends_on
+      target: security_group
+    - type: cloudify.relationships.depends_on
+      target: subnet
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'sg-07734540eb5a66e47'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  routetable:
+    type: cloudify.nodes.aws.ec2.RouteTable
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'rtb-06b1e4b56e1e9bd74'
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: vpc
+      - type: cloudify.relationships.connected_to
+        target: subnet
+
+  subnet:
+    type: cloudify.nodes.aws.ec2.Subnet
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'subnet-0fb50cb31825ca3b3'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  vpc:
+    type: cloudify.nodes.aws.ec2.Vpc
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'vpc-03f8bb1a9163a802a'
+
+  security_group:
+    type: cloudify.nodes.aws.ec2.SecurityGroup
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'sg-07734540eb5a66e47'
+    relationships:
+      - type: cloudify.relationships.depends_on
+        target: vpc
+
+  internet_gateway:
+    type: cloudify.nodes.aws.ec2.InternetGateway
+    properties:
+      client_config: *client_config
+      use_external_resource: true
+      resource_id: 'igw-094095b1f880209ac'
+    relationships:
+      - type: cloudify.relationships.connected_to
+        target: vpc
+
+outputs:
+
+  access_key:
+    description: The ssh key to access the machine
+    value: { get_secret: ssh-key }
+
+  machine_public_ip:
+    description: The external endpoint of the application.
+    value: { get_attribute: [ vm, public_ip_address ] }
