@@ -108,7 +108,7 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'sg-07734540eb5a66e47'
+      resource_id: 'sg-03e4afcd41ad494f4'
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
@@ -118,7 +118,7 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'rtb-06b1e4b56e1e9bd74'
+      resource_id: 'rtb-0010be7c9454f8f91'
     relationships:
       - type: cloudify.relationships.contained_in
         target: vpc
@@ -130,7 +130,7 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'subnet-0fb50cb31825ca3b3'
+      resource_id: 'subnet-0bd7f3c113b5eff3e'
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
@@ -140,14 +140,14 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'vpc-03f8bb1a9163a802a'
+      resource_id: 'vpc-056699641ad8a153c'
 
   security_group:
     type: cloudify.nodes.aws.ec2.SecurityGroup
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'sg-07734540eb5a66e47'
+      resource_id: 'sg-03e4afcd41ad494f4'
     relationships:
       - type: cloudify.relationships.depends_on
         target: vpc
@@ -157,7 +157,7 @@ node_templates:
     properties:
       client_config: *client_config
       use_external_resource: true
-      resource_id: 'igw-094095b1f880209ac'
+      resource_id: 'igw-00c48049ab5c55ab0'
     relationships:
       - type: cloudify.relationships.connected_to
         target: vpc
